@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports: 
+      - "3000:3000" # Porta do frontend
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend # Certifica-se de que o backend suba antes do frontend
+    networks:
+      - app-network
+
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3001:3001" # Porta do backend
+  #   volumes:
+  #     - ./backend:/app
+  #   depends_on:
+  #     - db # Certifica-se de que o banco de dados suba antes do backend
+  #   networks:
+  #     - app-network
+  
+  # db:
+  #   image: mysql:latest
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root # Senha do usuário root do MySQL
+  #     MYSQL_DATABASE: TesteDebanco # Banco de dados a ser criado
+  #     MYSQL_USER: user # Nome do usuário do banco de dados
+  #     MYSQL_PASSWORD: root # Senha do usuário
+  #   ports:
+  #     - "3306:3306" # Porta para acessar o MySQL
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge
