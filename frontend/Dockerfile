@@ -1,18 +1,23 @@
-# Imagem base
+# Usando a imagem oficial do Node.js com Alpine para um ambiente leve
 FROM node:18-alpine
 
-# Define o diretório de trabalho
+# Definir o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copia o package.json e instala as dependências
-COPY package*.json ./
+# Copiar os arquivos de dependência (package.json e package-lock.json) para o contêiner
+COPY package.json package-lock.json ./
+
+# Instalar dependências
 RUN npm install
 
-# Copia o código para o container
+# Copiar o restante do código da aplicação
 COPY . .
 
-# Expõe a porta do servidor de desenvolvimento
+# Rodar o build da aplicação React
+RUN npm run build
+
+# Expor a porta que o React usa
 EXPOSE 3000
 
-# Comando para iniciar o frontend
+# Comando para iniciar a aplicação React
 CMD ["npm", "start"]

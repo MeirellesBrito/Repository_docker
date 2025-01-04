@@ -1,16 +1,9 @@
-version: "3.9"
+version: "3.9"  # Ajuste aqui, foi 'docker-compose:version' antes
+
 services:
   frontend:
-      container_name: yobom_sorvetes2025_Frontend
-      build:
-        context: ./frontend
-        dockerfile: Dockerfile
-      ports: 
-        - "3000:3000" # Porta do frontend
-      volumes:
-        - ./frontend:/app
-      networks:
-        - app-network
-networks:
-  app-network:
-    driver: bridge
+    container_name: yobom_sorvetes2025_Frontend
+    build:
+      context: ./frontend
+    ports: 
+      - "3000:3000"  # O frontend estará acessível na porta 3000
